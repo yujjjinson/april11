@@ -1,0 +1,159 @@
+//panel 컴포넌트 . 
+//다른 컴포넌트를 가질수 있다. 안보인다. 포함할수 잇다 ./
+
+
+
+
+package syj;
+
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.CheckboxMenuItem;
+import java.awt.Choice;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
+import java.awt.Panel;
+import java.awt.TextField;
+
+
+class MenuWindow extends Frame{
+	MenuBar mb;//메뉴가 위치할 바
+	Menu menu;//메뉴바에 위치할 메뉴
+	
+	MenuItem[]items; // 메뉴에 위치할 메뉴 아이템 
+	Menu etc;//메뉴밑에 메뉴를 위한 메뉴 
+	CheckboxMenuItem check_item1;//체크할 수 있는 메뉴 아이템
+	CheckboxMenuItem check_item2;
+	
+	Button[] btns;	Font font;
+	
+	
+	Panel panel;//윈도우 가운데 들어갈 패널
+	////////////////////////////////////삽입 합니다. 
+	Label[] infos;
+	TextField[] inputs;
+	Choice depart;
+	Button[] buttons;
+	String[] depart_name = {"개발부","총무부","홍보부","영업부","배송부","관리부"};
+	////////////////////////////////////
+	void doIt() {//패널에 들어갈 컴포넌트 처리 메서드 
+		infos = new Label[3]; //레이블 3개용 배열생성
+		infos[0] = new Label("사번을 입력하세요");
+		infos[1] = new Label("이름을 입력하세요");
+		infos[2] = new Label("부서를 입력하세요");
+		
+		inputs =  new TextField[2]; //텍스트 필으 2개용 배열생성
+		inputs[0]= new TextField(10);
+		inputs[0].setBackground(Color.DARK_GRAY);
+		inputs[0].setForeground(Color.white);
+		inputs[1]= new TextField(20);
+		inputs[1].setBackground(Color.DARK_GRAY);
+		inputs[1].setForeground(Color.white);
+		depart=new Choice();//초이스생성
+		for (int i=0; i<depart_name.length; i++) {
+			depart.add(depart_name[i]);
+			}//모든 부서명을 초이스 추가
+		buttons= new Button[4];
+		buttons[0] = new Button("삽   입");
+		buttons[0].setBackground(Color.LIGHT_GRAY);
+		buttons[0].setForeground(Color.white);
+		buttons[1] = new Button("삭   제");
+		buttons[1].setBackground(Color.LIGHT_GRAY);
+		buttons[1].setForeground(Color.white);
+		buttons[2] = new Button("수   정"); 
+		buttons[2].setBackground(Color.LIGHT_GRAY);
+		buttons[2].setForeground(Color.white);
+		buttons[3] = new Button("조   회");
+		buttons[3].setBackground(Color.LIGHT_GRAY);
+		buttons[3].setForeground(Color.white);
+		this.setLayout(new GridLayout(5,4));
+	}
+	
+	void addPanel() {//패널에 컴퍼넌트를 붙이는 메서드 
+		panel.add(new Label());	panel.add(new Label());
+		panel.add(new Label());
+		panel.add(new Label());
+		panel.add(new Label());
+		panel.add(infos[0]); panel.add(inputs[0]);
+		panel.add(new Label()); panel.add(new Label());
+		panel.add(infos[1]); panel.add(inputs[1]);
+		panel.add(new Label());panel.add(new Label());
+		panel.add(infos[2]);panel.add(depart);
+		panel.add(new Label());
+		panel.add(buttons[0]);panel.add(buttons[1]);
+		panel.add(buttons[2]);panel.add(buttons[3]);
+		
+		
+	}
+	
+	MenuWindow(String str){
+		super(str);
+		panel = new Panel();//패널생성
+		panel.setLayout(new GridLayout(5,4));//패널에 배치관리자 설정//컨트롤시프트 오 한번더 해줘야 하 ㅁ
+		
+		doIt();
+		addPanel();
+		
+		font = new Font("Serif",Font.BOLD,30);
+		btns = new Button[5];
+		btns[0] = new Button("천원으로식사"); btns[0].setFont(font);
+		btns[1] = new Button("만원으로식사"); btns[1].setFont(font);
+		btns[2] = new Button("오천원으로 식사"); btns[2].setFont(font);
+		btns[3] = new Button("오만원으로식사");btns[3].setFont(font);
+		btns[4] = new Button("십만원으로식사");btns[4].setFont(font);
+		this.setLayout(new BorderLayout());
+		//보더 레이아웃을 이 윈도우의 배치관리자로 설정
+		this.add("North",btns[0]);
+		this.add("East",btns[1]);
+		this.add("West",btns[2]);
+		this.add("Center",panel);
+		this.add("South",btns[4]);
+		
+		
+		check_item1 = new CheckboxMenuItem("일단 먹는다");
+		check_item2 = new CheckboxMenuItem("일단 안먹는다");
+		mb = new MenuBar();
+		menu = new Menu("파일");
+		items = new MenuItem[7];//3개 메뉴아이템을 위한 배열 생성
+		items[0] = new MenuItem("한식");//첫번째 메뉴아이템 생성
+		items[1] = new MenuItem("양식");//두번째 메뉴아이템 생성
+		items[2] = new MenuItem("일식");//세번째 메뉴아이템 생성
+		items[3] = new MenuItem("중식");
+		menu.add(items[0]);menu.add(items[1]);menu.add(items[2]);menu.add(items[3]);
+		
+		//메뉴 추가
+		etc = new Menu("모르겟으면..");
+		items[4] = new MenuItem("친구찬스");
+		items[5] = new MenuItem("어플찬스");
+		items[6] = new MenuItem("굶기^_^");
+		
+		etc.add(items[4]);etc.add(items[5]);etc.add(items[6]);
+		menu.addSeparator();//구분선추가
+		menu.add(etc);//메뉴에 메뉴 (etc)를 붙인다. 
+		menu.addSeparator();//구분선 추가
+		menu.add(check_item1); menu.add(check_item2);
+		
+		//메뉴에 메뉴아이템을 붙인다.
+		
+		
+		mb.add(menu);//메뉴바에 메뉴를 붙인다
+		this.setMenuBar(mb);//현재 윈도우에 메뉴바를 붙인다.
+		this.setSize(400,200);
+		this.setVisible(true);
+		
+	}
+}
+public class Study04 {
+
+	public static void main(String[] args) {
+		new MenuWindow("음식정하기 파일 ");
+
+	}
+
+}
