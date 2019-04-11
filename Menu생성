@@ -1,0 +1,137 @@
+선생님이 한거를 먼저 올림. 메뉴 밑으로 내리는 방법 분석하기
+
+
+package senior;
+
+import java.awt.CheckboxMenuItem;
+import java.awt.Frame;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
+
+class MenuWindow extends Frame {
+	MenuBar mb;//메뉴가 위치할 바
+	Menu menu;//메뉴바에 위치할 메뉴
+	MenuItem[] items;//메뉴에 위치할 메뉴아이템
+	Menu etc;//메뉴 밑에 메뉴를 위한 메뉴
+	Menu file;//파일 메뉴
+	CheckboxMenuItem check_item1;//체크할 수 있는 메뉴아이템
+	CheckboxMenuItem check_item2;
+	MenuWindow(String str){
+		super(str);
+		check_item1 = new CheckboxMenuItem("체크메뉴1");
+		check_item2 = new CheckboxMenuItem("체크메뉴2");
+		mb = new MenuBar();
+		menu = new Menu("파일");
+		items = new MenuItem[6];//3개 메뉴아이템을 위한 배열 생성
+		//items[0] = new MenuItem("새파일");//첫번째 메뉴아이템 생성
+		file = new Menu("새파일");
+		MenuItem mi = new MenuItem("새파일 서브메뉴");
+		file.add(mi);
+		
+		items[1] = new MenuItem("불러오기");//첫번째 메뉴아이템 생성
+		items[2] = new MenuItem("저장하기");//첫번째 메뉴아이템 생성
+//		menu.add(items[0]);
+		menu.add(file);
+		menu.add(items[1]); menu.add(items[2]);
+		etc = new Menu("기타");
+		items[3] = new MenuItem("서브 메뉴1");
+		items[4] = new MenuItem("서브 메뉴2");
+		items[5] = new MenuItem("서브 메뉴3");
+		etc.add(items[3]);etc.add(items[4]);etc.add(items[5]);
+		menu.addSeparator();//구분선 추가
+		menu.add(etc);//메뉴에 메뉴(etc)를 붙인다.
+		menu.addSeparator();//구분서 추가
+		menu.add(check_item1); menu.add(check_item2);
+		//메뉴에 메뉴아이템을 붙인다.
+		mb.add(menu);//메뉴바에 메뉴를 붙인다.
+		this.setMenuBar(mb);//현재 윈도우에 메뉴바를 붙인다.
+		this.setSize(200, 200);
+		this.setVisible(true);
+	}
+}
+public class Study4 {
+	public static void main(String[] args) {
+		new MenuWindow("메뉴 윈도우");
+	}
+
+}
+
+
+
+
+
+
+
+
+
+(2)
+
+
+
+이건 내꺼로 하위항목 개설 방법 아직 이해못함
+
+
+
+
+
+package syj;
+
+import java.awt.CheckboxMenuItem;
+import java.awt.Frame;
+import java.awt.Menu;
+import java.awt.MenuBar;
+import java.awt.MenuItem;
+
+
+class MenuWindow extends Frame{
+	MenuBar mb;//메뉴가 위치할 바
+	Menu menu;//메뉴바에 위치할 메뉴
+	
+	MenuItem[]items; // 메뉴에 위치할 메뉴 아이템 
+	Menu etc;//메뉴밑에 메뉴를 위한 메뉴 
+	CheckboxMenuItem check_item1;//체크할 수 있는 메뉴 아이템
+	CheckboxMenuItem check_item2;
+	MenuWindow(String str){
+		super(str);
+		check_item1 = new CheckboxMenuItem("일단 먹는다");
+		check_item2 = new CheckboxMenuItem("일단 안먹는다");
+		mb = new MenuBar();
+		menu = new Menu("파일");
+		items = new MenuItem[7];//3개 메뉴아이템을 위한 배열 생성
+		items[0] = new MenuItem("한식");//첫번째 메뉴아이템 생성
+		items[1] = new MenuItem("양식");//두번째 메뉴아이템 생성
+		items[2] = new MenuItem("일식");//세번째 메뉴아이템 생성
+		items[3] = new MenuItem("중식");
+		menu.add(items[0]);menu.add(items[1]);menu.add(items[2]);menu.add(items[3]);
+		
+		//메뉴 추가
+		etc = new Menu("모르겟으면..");
+		items[4] = new MenuItem("친구찬스");
+		items[5] = new MenuItem("어플찬스");
+		items[6] = new MenuItem("굶기^_^");
+		
+		etc.add(items[4]);etc.add(items[5]);etc.add(items[6]);
+		menu.addSeparator();//구분선추가
+		menu.add(etc);//메뉴에 메뉴 (etc)를 붙인다. 
+		menu.addSeparator();//구분선 추가
+		menu.add(check_item1); menu.add(check_item2);
+		
+		//메뉴에 메뉴아이템을 붙인다.
+		
+		
+		mb.add(menu);//메뉴바에 메뉴를 붙인다
+		this.setMenuBar(mb);//현재 윈도우에 메뉴바를 붙인다.
+		this.setSize(400,200);
+		this.setVisible(true);
+		
+	}
+}
+public class Study04 {
+
+	public static void main(String[] args) {
+		new MenuWindow("음식정하기 파일 ");
+
+	}
+
+}
