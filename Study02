@@ -1,0 +1,65 @@
+package syj;
+
+import java.awt.Button;
+import java.awt.Choice;
+import java.awt.Frame;
+import java.awt.GridLayout;
+import java.awt.Label;
+import java.awt.TextField;
+
+class EmpSystem extends Frame{
+	Label[] infos;
+	TextField[] inputs;
+	Choice depart;
+	Button[] btns;
+	String[] depart_name = {"개발부","총무부","홍보부","영업부","배송부","관리부"};
+	
+	EmpSystem(String title){
+		super(title);
+		infos = new Label[3]; //레이블 3개용 배열생성
+		infos[0] = new Label("사번을 입력하세요");
+		infos[1] = new Label("이름을 입력하세요");
+		infos[2] = new Label("부서를 입력하세요");
+		
+		inputs =  new TextField[2]; //텍스트 필으 2개용 배열생성
+		inputs[0]= new TextField(10);
+		inputs[1]= new TextField(20);
+		
+		depart=new Choice();//초이스생성
+		for (int i=0; i<depart_name.length; i++) {
+			depart.add(depart_name[i]);
+			}//모든 부서명을 초이스 추가
+		btns = new Button[4];
+		btns[0] = new Button("삽   입"); btns[1] = new Button("삭   제");
+		btns[2] = new Button("수   정"); btns[3] = new Button("조   회");
+		this.setLayout(new GridLayout(5,4));
+		//화면을 5행 4열로 분할해서 각 영역에 컴포넌트를 배치시키는
+		//배치관리자(GridLayout)생성
+		this.add(new Label());	this.add(new Label());
+		this.add(new Label());
+		this.add(new Label());
+		this.add(new Label());
+		this.add(infos[0]); this.add(inputs[0]);
+		this.add(new Label()); this.add(new Label());
+		this.add(infos[1]); this.add(inputs[1]);
+		this.add(new Label());this.add(new Label());
+		this.add(infos[2]);this.add(depart);
+		this.add(new Label());
+		this.add(btns[0]);this.add(btns[1]);
+		this.add(btns[2]);this.add(btns[3]);
+		
+		this.setSize(400,200);
+		this.setVisible(true);
+		
+	}
+	
+}
+public class Study02 {
+
+	public static void main(String[] args) {
+		EmpSystem es = new EmpSystem("사원정보관리 ver1.0");
+		
+
+	}
+
+}
